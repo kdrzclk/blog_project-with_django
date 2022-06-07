@@ -11,6 +11,9 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
 
     OPTIONS = (
@@ -27,5 +30,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=OPTIONS, default='draft')
     slug = models.SlugField(blank=True, unique=True)
+
+    def __str__(self):
+        return self.title
 
     
