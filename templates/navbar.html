@@ -1,0 +1,59 @@
+{% load static %}
+
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top">
+  <button
+    class="navbar-toggler navbar-toggler-right"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarCollapse"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <a href="{% url 'blog:list' %}" class="navbar-brand"> Clarusway Blog </a>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a href="{% url 'blog:list' %}" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a href="" class="nav-link">About</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      {% if request.user.is_authenticated %} {% if request.user.is_superuser %}
+
+      <li class="nav-item active">
+        <a href="/admin" class="nav-link">Admin</a>
+      </li>
+      {% endif %}
+
+      <li class="nav-item active">
+        <a class="nav-link" href="">Log Out</a>
+      </li>
+
+      <li class="nav-item active">
+        
+        <a class="nav-link" href="">Profile</a>
+      </li>
+
+      <li class="nav-item active mr-5">
+        <a class="nav-link new-post" href="{% url 'blog:create' %}">New Post</a>
+      </li>
+
+      {% else %}
+      <li class="nav-item active">
+        <a href="" class="nav-link">Log In</a>
+      </li>
+
+      <li class="nav-item active mr-5">
+        <a href="" class="nav-link register">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

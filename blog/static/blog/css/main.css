@@ -1,0 +1,24 @@
+#home-title {
+    text-align: center;
+  }
+  
+  .navbar {
+    background-color: #5f788a;
+  }
+  
+  .navbar-brand {
+    margin-left: 100px;
+  }
+  
+  .new-post,
+  .register {
+    margin-right: 100px;
+  }
+  
+  a:hover {
+    opacity: 0.5;
+  }
+  
+  strong {
+    display: none;
+  }
