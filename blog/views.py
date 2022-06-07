@@ -5,7 +5,7 @@ from .forms import PostForm
 # Create your views here.
 
 def post_list(request):
-    qs = Post.objects.all()
+    qs = Post.objects.filter(status="Published")
     context = {
         'object_list': qs
     }
