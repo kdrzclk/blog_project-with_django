@@ -2,13 +2,17 @@
 
 {% block content %} 
 
+    {% load crispy_forms_tags %}
+
     {% for object in object_list %} 
 
-        <a href="{% url 'blog:detail' object.slug %}">
-            <h1>{{ object.title }}</h1>
-        </a>
-        <img src="{{ object.image.url }}" alt="{{ object.title }}" />
+        <h1>
+            <a href="{% url 'blog:detail' object.slug %}"> {{ object.title }} </a>
+        </h1>
+
+        <img src="{{ object.image.url }}" alt="post_image" />
         <p>{{ object.content | truncatechars:20 }} </p> 
+
     {% endfor %}
 
 {% endblock content %}

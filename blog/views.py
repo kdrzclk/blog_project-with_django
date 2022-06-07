@@ -5,15 +5,19 @@ from .forms import PostForm
 # Create your views here.
 
 def post_list(request):
-    qs = Post.objects.filter(status="Published")
+    qs = Post.objects.filter(status="published")
+    # qs = Post.objects.all()
+    print(qs)
     context = {
         'object_list': qs
     }
     return render(request, 'blog/post_list.html', context)
 
-def post_create(request):
-    form = PostForm()
 
+def post_create(request):
+    
+    form = PostForm()
+    
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
 
@@ -32,6 +36,22 @@ def post_create(request):
 def post_detail(request, slug):
     obj = get_object_or_404(Post, slug=slug)
     context = {
-        'object': obj
+        'object': obj,
     }
     return render(request, 'blog/post_detail.html', context)
+
+def post_update(request, slug):
+    obj = get_object_or_404(Post, slug=slug)
+    form = PostForm(request.POST or None, request.FILES or None, instance=obj)
+
+    if form.is_valid():
+        form.save()
+
+        return redirect("blog:list")
+    
+    context = {
+        'object': obj,
+        'form': form
+    }
+    return render(request, 'blog/post_update.html', context)
+
