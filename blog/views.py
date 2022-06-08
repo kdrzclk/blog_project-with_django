@@ -1,13 +1,13 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
 # Create your views here.
 
 def post_list(request):
     qs = Post.objects.filter(status="published")
     # qs = Post.objects.all()
-    print(qs)
+    # print(qs)
     context = {
         'object_list': qs
     }
@@ -34,9 +34,23 @@ def post_create(request):
     return render(request, 'blog/post_create.html', context)
 
 def post_detail(request, slug):
+    form = CommentForm()
     obj = get_object_or_404(Post, slug=slug)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = obj
+            comment.save()
+
+            return redirect("blog:detail", slug=slug)
+
     context = {
         'object': obj,
+        'form': form
     }
     return render(request, 'blog/post_detail.html', context)
 
