@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Post
+from .models import Post, Like
 from .forms import PostForm, CommentForm
 
 # Create your views here.
@@ -81,4 +81,15 @@ def post_delete(request, slug):
         'object': obj
     }
     return render(request, "blog/post_delete.html", context)
+
+def like(request, slug):
+    if request.method == 'POST':
+        obj = get_object_or_404(Post, slug=slug)
+        like_qs = Like.objects.filter(user=request.user, post=obj)
+
+        if like_qs.exist():
+            like_qs[0].delete()
+        else:
+            Like.objects.create(user=request.user, post=obj)
+
 
