@@ -8,6 +8,7 @@
       class="card-img-top"
     />
     <div class="card-body">
+      <hr />
       <h2 class="card-title">{{ object.title }}</h2>
 
       <hr />
@@ -73,37 +74,42 @@
       </div>
       <hr />
       <h5 class="mb-2">Leave a comment below</h5>
-      
-        <div class="form-group" id="idv_id_content">
-          <div>
-            <form action="" method="post">
-              {% csrf_token %} {{ form | crispy }}
 
-              <input
-                type="submit"
-                value="Send"
-                class="btn btn-info btn-sm mt-1 mb-1 p-2"
-              />
-            </form>
-          </div>
+      <div class="form-group" id="idv_id_content">
+        <div>
+          <form action="" method="post">
+            {% csrf_token %} {{ form | crispy }}
+
+            <input
+              type="submit"
+              value="Send"
+              class="btn btn-info btn-sm mt-1 mb-1 p-2"
+            />
+          </form>
         </div>
-      
+      </div>
+
       <hr />
-      
     </div>
 
     {% if user.id == object.author.id %}
     <div class="mt-2 mb-2">
-      <a href="{% url 'blog:update' object.slug %}" class="btn btn-primary">Edit</a>
+      <a href="{% url 'blog:update' object.slug %}" class="btn btn-primary"
+        >Edit</a
+      >
       <a href="{% url 'blog:delete' object.slug %}" class="btn btn-danger ml-3"
         >Delete</a
       >
+      <hr />
     </div>
+    
     {% endif %}
-    
-    <div><hr />
-    <h4>Comments</h4></div>
-    
+
+    <div>
+      
+      <h4>Comments</h4>
+    </div>
+
     <div class="mt-2">
       {% for comment in object.comments %}
 
