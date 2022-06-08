@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Post, Like
 from .forms import PostForm, CommentForm
@@ -71,6 +72,9 @@ def post_update(request, slug):
 
 def post_delete(request, slug):
     obj = get_object_or_404(Post, slug=slug)
+
+    if request.user.id != obj.author.id:
+        return HttpResponse("You're not authorized")
 
     if request.method == "POST":
         obj.delete()
