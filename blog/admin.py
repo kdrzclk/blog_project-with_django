@@ -1,4 +1,3 @@
-from turtle import position
 from django.contrib import admin
 from .models import Category, Post, Comment, Like, PostView
 
