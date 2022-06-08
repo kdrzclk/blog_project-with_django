@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from .forms import RegistrationForm
+from django.contrib.auth import login
 
 # Create your views here.
 def register(request):
@@ -8,9 +9,10 @@ def register(request):
     if form.is_valid():
         form.save()
 
+        # login(request, user)
         return redirect('blog:list')
 
     context ={
         'form': form,
     }
-    return render(request, 'users/register.html')
+    return render(request, 'users/register.html', context)
