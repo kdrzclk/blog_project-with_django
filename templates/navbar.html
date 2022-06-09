@@ -33,7 +33,7 @@
       {% endif %}
 
       <li class="nav-item active">
-        <a class="nav-link" href="">Log Out</a>
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
       </li>
 
       <li class="nav-item active">
@@ -47,7 +47,7 @@
 
       {% else %}
       <li class="nav-item active">
-        <a href="" class="nav-link">Log In</a>
+        <a href="{% url 'login' %}" class="nav-link">Log In</a>
       </li>
 
       <li class="nav-item active mr-5">
