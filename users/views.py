@@ -13,7 +13,8 @@ def register(request):
     if form.is_valid():
         form.save()
         name = form.cleaned_data["username"]
-        # messages.success(request, f"Account created for {name}")
+        
+        messages.success(request, f"Account created for {name}")
         # login(request, user)
         return redirect("login")  
                 
@@ -29,7 +30,8 @@ def profile(request):
     if u_form.is_valid() and p_form.is_valid():
         u_form.save()
         p_form.save()
-        # messages.success(request, "Your profile has been updated!")
+        
+        messages.success(request, "Your profile has been updated!")
         return redirect(request.path)
     
     context = {
