@@ -1,4 +1,4 @@
-let element = document.getElementById("#");
+let element = document.getElementById("b");
 
 setTimeout(function () {
   element.style.display = "none";
